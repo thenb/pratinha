@@ -1,0 +1,30 @@
+<ion-view>
+	<ion-nav-title><img src="img/logo9.png" style="padding-top:5px"/></ion-nav-title>
+	<ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="goBack()">
+      <i class="icon ion-ios-arrow-back"></i> 
+    </button>
+	</ion-nav-buttons>
+	<ion-content>
+		<h3 class="text-center">Pontuação Atual: <strong>{{pontuacaoAtual}}</strong> pontos</h2>		
+		<label class="item item-input item-select">
+			<div class="input-label">Selecione</div>
+			<select ng-model="campanhaAtual" ng-options="campanhaAtual.id as campanhaAtual.nome for campanhaAtual in campanhas" ng-change="changeCampPoints(campanhaAtual)"></select>
+		</label>
+		<p class="output" style="padding-top:15px" ng-if="pontuacoes.length!=0">Total da busca: <b>{{filtered.length}}</b></p>
+			<ion-card class="text-center" ng-repeat="pontos in pontuacoes | filter:busca as filtered">					
+				<a class="item item-avatar item-icon-right">
+					<i class="icon ion-trophy muted" style="left:16px;padding-left:20px;"></i>
+					<h2>{{pontos.pontos}} Pontos</h2>
+					<p>{{pontos.descricao}}</p>
+					<p>Pontuado por: {{pontos.nome}}</p>
+					<i class="icon ion-trophy muted"></i>
+				</a>				
+			</ion-card>
+			<h2 class="text-center" ng-if="pontuacoes.length==0">Nenhuma pontuação cadastrada.</h2>
+<br><br>			
+	</ion-content>
+	<div class="bar bar-footer bar-dark">
+		<h1 class="title"><i class="icon ion-heart"></i> Desenvolvido por DNBproject</h1>
+	</div>
+</ion-view>

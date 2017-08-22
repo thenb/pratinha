@@ -1,0 +1,26 @@
+<ion-view>
+	<ion-nav-title><img src="img/logo9.png" style="padding-top:5px"/></ion-nav-title>
+	<ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" ng-click="goBack()">
+      <i class="icon ion-ios-arrow-back"></i> 
+    </button>
+	</ion-nav-buttons>
+	<ion-content>		
+		<ion-card class="text-center">			
+			<h3>Notificações</h3>
+			<div class="list"  style="padding-bottom:40px">
+				<a ng-repeat="item in notificacoes" href="#/{{item.id}} " ng-style="set_color(item)" class="item item-thumbnail-left">
+				  <i class="icon ion-ribbon-b notificacaoLista" ng-if="item.tipo==1"></i>
+				  <i class="icon ion-calendar notificacaoLista" ng-if="item.tipo ==2"></i>
+				  <i class="icon ion-home notificacaoLista" ng-if="item.tipo==3"></i>		
+				  <h2 style="white-space:initial;">{{ item.title }}</h2>
+				  <h4 style="padding-top:10px;white-space: initial; ">{{ item.content }}</h4>
+				</a>
+			</div> 
+		</ion-card>	
+		<br><br>
+	</ion-content>
+	<div class="bar bar-footer bar-dark">
+		<h1 class="title"><i class="icon ion-heart"></i> Desenvolvido por DNBproject</h1>
+	</div>
+</ion-view>

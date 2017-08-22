@@ -1,0 +1,52 @@
+<ion-view hide-nav-bar="true" view-title="Login"> 
+  <ion-content>  
+	<form name="formLogin">
+	  <div class="row ">
+		<div class="col col-33 col-offset-33">
+			<img src="img/logo3.png" class="text-center" style="padding-top:10px"/>			
+		</div>
+	  </div>
+	  <div class="list">
+        <label class="item item-input item-floating-label">
+			<span class="input-label">E-mail</span>
+			<input type="text" placeholder="E-mail" ng-model="user.email" name="email" required>			
+			<div ng-messages="formLogin.email.$error">
+				<div ng-message="required">
+					<p style="color:red">Favor inserir o e-mail.</p>
+				</div>						  
+			</div>					
+		</label>
+		<label class="item item-input item-floating-label">
+			<span class="input-label">Senha</span>
+			<input type="password" placeholder="Senha" ng-model="user.senha" name="senha1" required>			
+			<div ng-messages="formLogin.senha1.$error">
+				<div ng-message="required">
+					<p style="color:red">Favor inserir a senha.</p>
+				</div>	
+				<div ng-message="naoExiste">
+				<p style="color:red">Usuário não cadastrado ou senha incorreta.</p>
+				</div>	
+			</div>					
+		</label> 
+        <label class="item">
+			<button class="button button-block button-positive" ng-click="login(formLogin)">Entrar</button>			
+		</label>
+		<li class="item item-toggle">
+           Salvar Dados
+           <label class="toggle toggle-positive">
+             <input type="checkbox" ng-model="user.lembrar" name="lembrar">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+           </label>
+        </li>
+		<li class="item">
+			<a href="http://ec2-52-67-99-176.sa-east-1.compute.amazonaws.com:9000/recover.html" target="_blank" class="pull-right">Não lembra a senha?</a>
+		</li>
+      </div> 
+	</form>
+  </ion-content>
+  <div class="bar bar-footer bar-dark">
+		<h1 class="title"><i class="icon ion-heart"></i> Desenvolvido por DNBproject</h1>
+	</div>
+</ion-view>

@@ -1,0 +1,66 @@
+<ion-view>
+	<ion-nav-title><img src="img/logo9.png" style="padding-top:5px"/></ion-nav-title>
+	<ion-nav-buttons side="left">    
+	</ion-nav-buttons>
+	<ion-content>	
+		<div class="hero" style="background-color: #27386D">
+            <div class="content">
+                <div class="avatar" style="background-image: url('img/user.jpg');"></div>
+                <h3 ng-if="user.login.id_tipo_login==3">{{user.especificador.nome}}</h3>
+				<h3 ng-if="user.login.id_tipo_login==4">{{user.cliente.nome}}</h3>
+				<h3 ng-if="user.login.id_tipo_login==2">{{user.empresa.nome}}</h3>
+				<h3 ng-if="user.login.id_tipo_login==1">Administrador</h3>
+				<h4 style="font-style: italic;" ng-if="user.login.id_tipo_login==3">Especificador</h4>
+				<h4 style="font-style: italic;" ng-if="user.login.id_tipo_login==4">Cliente</h4>
+				<h4 style="font-style: italic;" ng-if="user.login.id_tipo_login==2">Empresa</h4>
+				<h4 style="font-style: italic;" ng-if="user.login.id_tipo_login==1">Administrador</h4>
+            </div>
+        </div>		
+		<div class="list">           
+			<a ui-sref="app.pontuacoes" class="item item-avatar item-icon-left" ng-if="user.login.id_tipo_login==3">               
+                <h2>{{pontuacaoAtual}} Pontos</h2>
+				 <p>Ver Pontos</p>
+                <i class="icon ion-trophy muted"></i>
+            </a>
+			<a ui-sref="app.clientes" class="item item-avatar item-icon-left" ng-if="user.login.id_tipo_login==3">               
+                <h2>{{totalIndicacoes}} Indicações</h2>
+				 <p>Ver Indicações</p>
+                <i class="icon ion-person-add muted"></i>
+            </a>
+			<a ui-sref="app.clientes" class="item item-avatar item-icon-left" ng-if="user.login.id_tipo_login==2">               
+                <h2>Ver Clientes</h2>
+				<i class="icon ion-person-add muted"></i>
+            </a>
+			<a ui-sref="app.notificacoes" class="item item-avatar item-icon-left">                
+                <h2>10 Novas Notificações</h2>
+                <p>Ver Notificações</p>
+                <i class="icon ion-clipboard muted"></i>
+            </a>
+			 <a ui-sref="app.perfil" class="item item-avatar item-icon-left">               
+                <h2>Ver Perfil</h2>               
+                <i class="icon ion-person muted"></i>
+            </a>
+			<a ui-sref="app.visitas" class="item item-avatar item-icon-left" ng-if="user.login.id_tipo_login==3 || user.login.id_tipo_login==4">               
+                <h2>{{totalVisitas}} de 13 empresas Visitadas</h2>
+				 <p>Ver Visitas</p>
+                <i class="icon ion-log-in muted"></i>
+            </a>  
+			<a class="item item-avatar item-icon-left" ng-if="user.login.id_tipo_login==2">               
+                <h2>Presença Mensal: 12/14 </h2>
+                <i class="icon ion-calendar muted"></i>
+            </a>
+			<a class="item item-avatar item-icon-left" ng-if="user.login.id_tipo_login==2">               
+                <h2>Valor Débito: R$200,00 </h2>
+                <i class="icon ion-arrow-graph-down-right muted"></i>
+            </a>
+			<a class="item item-avatar item-icon-left" ng-if="user.login.id_tipo_login==2">               
+                <h2>Valor Créditos: R$200,00 </h2>
+                <i class="icon ion-arrow-graph-up-right muted"></i>
+            </a>                      
+			<br><br>
+        </div>			
+	</ion-content>
+	<div class="bar bar-footer bar-dark">
+		<h1 class="title"><i class="icon ion-heart"></i> Desenvolvido por DNBproject</h1>
+	</div>
+</ion-view>
