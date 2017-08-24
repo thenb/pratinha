@@ -31,16 +31,16 @@ angular.module('starter.controllers', [])
 	
 	$scope.notificacoes = [
 	{ title: 'Prêmio Próximo!',tipo: 1, unread:0, id: 1, content: 'Paulo, faltam apenas 3000 pontos para o prêmio 123.' },
-	{ title: 'Mudança no Status da Obra!' ,  unread:0, tipo: 3 , id: 3, content: 'Paulo, houve mudança na obra 123.' },
-	{ title: 'Feliz Aniversário!',tipo: 2, unread:1, id: 2, content: 'Paulo, o Prata da Casa te deseja um excelente aniversário.' },
+	{ title: 'Mudança no Status da Obra!' ,  unread:1, tipo: 3 , id: 3, content: 'Paulo, houve mudança na obra 123.' },
+	{ title: 'Feliz Aniversário!',tipo: 2, unread:0, id: 2, content: 'Paulo, o Prata da Casa te deseja um excelente aniversário.' },
 	{ title: 'Mudança no Status da Obra!',  unread:1, tipo: 3, id: 4, content: 'Paulo, houve mudança na obra 321.' }
 	];
 	  
 	$scope.set_color = function (item) {
 		if (item.unread == 0) {
-			return { "background-color": "#ADD8E6" }
+			return { "background-color": "#f8f8f8" }
 		}else{
-			return { "background-color": "white" }
+			return { "background-color": "#ffffff" }
 		}
 	}
 })
