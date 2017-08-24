@@ -10,8 +10,9 @@
         <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="right">
-        <ion-header-bar class="dark-bg expanded" style="background: url(img/back2.png); background-position: center;">
-            <span class="avatar" style="background: url('img/logo6.png'); background-size: cover; top: 5px; left: 65px; height: 140px; width: 140px;"></span>      
+		<ion-header-bar class="expanded bar bar-header disable-user-behavior">
+            <img src="img/favico.png" class="avatar motion spin fade">
+            <div class="menu-bottom" style="font-size: 20px; font-weight: bolder;">Prata da Casa App</div>
         </ion-header-bar>
         <ion-content class="has-expanded-header" style="background-color:#ffffff">
             <ion-list>
@@ -31,15 +32,16 @@
 <script id="templates/modal.html" type="text/ng-template">
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">Logout</h1>
+		  <strong class="title" style="font-size: 20px; color: #ffffff;">Logout</strong>
           <button class="button button-clear button-primary" ng-click="modal.hide()"><i class="icon ion-close"></i></button>
         </ion-header-bar>
         <ion-content class="padding">
-          <div class="list">
-            <p>Deseja mesmo fazer logout?</p>			
-            <button class="button button-full button-positive" ng-click="logout()">Sim</button>
-			<button class="button button-full button-positive" ng-click="modal.hide()">Não</button>
-          </div>
+        <div class="row">
+            <span  style="font-size: 20px; padding-bottom:20px;">Deseja mesmo fazer logout?</span><br>	              
+		</div>
+		<button class="button tema button-full button-positive" ng-click="logout()">Sim</button>
+		<button class="button tema button-full button-positive" ng-click="modal.hide()">Não</button>
+
         </ion-content>
       </ion-modal-view>
 </script>
