@@ -32,7 +32,7 @@ angular.module('starter', ['ionic','ionic-material','restangular','ngMessages','
 
 
 
-.run(function($ionicPlatform, $rootScope) {
+.run(function($ionicPlatform, $rootScope, $location) {
 	$ionicPlatform.ready(function() {
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs)
@@ -43,10 +43,10 @@ angular.module('starter', ['ionic','ionic-material','restangular','ngMessages','
 		if (window.StatusBar) {
 		  // org.apache.cordova.statusbar required
 		  StatusBar.styleDefault();
-		}
-	});
+		}	
+	});	
+	$rootScope.user = {};	
 	
-	$rootScope.user = {};
 	
 })
 
@@ -182,6 +182,18 @@ angular.module('starter', ['ionic','ionic-material','restangular','ngMessages','
 		params: {cliente: null }	
 	})
 	
+	.state('app.notificacao', {
+		cache: false,
+		url: '/notificacao',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/notificacao.html',
+				controller: 'NotificacaoCtrl'
+        }
+		},
+		params: {notificacao: null }
+	})
+	
 	.state('app.pontuacoes', {
 		cache: false,
 		url: '/pontuacoes',
@@ -191,13 +203,13 @@ angular.module('starter', ['ionic','ionic-material','restangular','ngMessages','
 				controller: 'PontuacoesCtrl'
         }
 		}
-	})
-	;
+	});
 	
 	
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
-  RestangularProvider.setBaseUrl('http://ec2-54-233-210-28.sa-east-1.compute.amazonaws.com:9002/');
+  RestangularProvider.setBaseUrl('https://prata.herokuapp.com/');
+  //RestangularProvider.setBaseUrl('http://ec2-54-233-210-28.sa-east-1.compute.amazonaws.com:9002/');
   $httpProvider.interceptors.push('authInterceptor');
   
 });

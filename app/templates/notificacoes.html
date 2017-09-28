@@ -11,18 +11,22 @@
 				<strong class="title" style="font-size: 20px; padding-top: 5px; color: #ffffff;">Notificações</strong>
 			</div>
 			<div class="list"  style="padding-bottom:40px">
-
-					<a ng-repeat="item in notificacoes" class="item item-avatar item-icon-right"  ng-style="set_color(item)">
+					<a ng-repeat="item in notificacoes" class="item item-avatar item-icon-right" ng-click="verificar(item)" ng-style="set_color(item)">
 						<img src="img/premio.png" ng-if="item.tipo==1">
-						<img src="img/calendario.png" ng-if="item.tipo==2">
+						<img src="img/empresa.png" ng-if="item.tipo==2">
 						<img src="img/empresa.png" ng-if="item.tipo==3">
-						<h2 style="text-align: left;">{{ item.title }}</h2>
-						<p style="text-align: left;">{{ item.content }}</p>
+						<img src="img/calendario.png" ng-if="item.tipo==4">
+						<img src="img/premio.png" ng-if="item.tipo==5">
+						<img src="img/calendario.png" ng-if="item.tipo==6">	
+						<img src="img/empresa.png" ng-if="item.tipo==7">						
+						<h2 style="text-align: left;">{{ item.titulo }}</h2>
+						<p style="text-align: left;">{{ item.msg }}</p>
 						<i class="icon ion-chevron-right muted small-icon"></i>
 					</a>
 				
 			</div> 
 		</ion-card>	
+		<h5 class="text-center" ng-if="notificacoes.length==0">Nenhuma notificação recebida.</h5>
 		<br><br>
 	</ion-content>
 	<div class="bar bar-footer bar-dark">

@@ -4,6 +4,9 @@
     "private": true,
     "dependencies": {
         "cordova-android": "^6.2.3",
+        "cordova-plugin-fcm": "^2.1.2",
+        "cordova-plugin-inappbrowser": "^1.7.1",
+        "cordova-plugin-velda-devicefeedback": "0.0.2",
         "cordova-plugin-whitelist": "git+https://github.com/apache/cordova-plugin-whitelist.git"
     },
     "devDependencies": {
@@ -56,14 +59,21 @@
         "org.apache.cordova.device",
         "org.apache.cordova.console",
         "com.ionic.keyboard",
-        "https://github.com/apache/cordova-plugin-whitelist.git"
+        "https://github.com/apache/cordova-plugin-whitelist.git",
+        "cordova-plugin-inappbrowser",
+        "cordova-plugin-velda-devicefeedback",
+        "phonegap-plugin-push@1.8.4",
+        "cordova-plugin-fcm"
     ],
     "cordova": {
         "platforms": [
             "android"
         ],
         "plugins": {
-            "cordova-plugin-whitelist": {}
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-velda-devicefeedback": {},
+            "cordova-plugin-fcm": {}
         }
     }
 }

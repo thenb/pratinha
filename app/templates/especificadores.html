@@ -18,11 +18,13 @@
 				<ion-card class="text-center" ng-repeat="especificador in especificadores | orderBy:'nome' | filter:busca as filtered">
 					<a ng-click="detalhes(especificador)" class="item item-avatar item-icon-right">
 						<img src="img/mini.jpg">
-						<h2 style="text-align: left;">{{especificador.nome}}</h2>
+						<h2 style="text-align: left;">{{especificador.nome}} {{especificador.sobrenome}} </h2>
 						<p style="text-align: left;">{{especificador.empresa}}</p>
+						<h2 style="text-align: left;" ng-if="user.login.id_tipo_login==2">Pontos: {{especificador.pontos}}</h2>
 						<i class="icon ion-chevron-right muted small-icon"></i>
 					</a>				
 				</ion-card>	
+				<h5 class="text-center" ng-if="notificacoes.length==0">Nenhum especificador cadastrado.</h5>
 		</div>
 	</ion-content>
 	<div class="bar bar-footer bar-dark">

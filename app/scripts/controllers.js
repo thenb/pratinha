@@ -3,8 +3,6 @@ angular.module('starter.controllers', [])
 .controller('AppCtrl', function($scope, $rootScope, $ionicModal, $state) {
 	
 	
-	console.log($rootScope.user)
-	
 	$ionicModal.fromTemplateUrl('templates/modal.html', {
 		scope: $scope
 	}).then(function(modal) {
@@ -22,36 +20,90 @@ angular.module('starter.controllers', [])
 	
 })
 
-.controller('NotificacoesCtrl', function($scope, $stateParams, $state) {
-	console.log('entrou no Notificacoes?');
+.controller('NotificacoesCtrl', function($scope, $stateParams, $state, $q, Restangular, $rootScope) {
+	console.log('entrou no Notificacoes?');	
+	var promises = [];
+	$scope.user = $rootScope.user
+	
+	function init() {				
+	} 
+	
+	
+	function getAllNotifications() {			
+		var deffered  = $q.defer();	
+		var params = {  id_login : $scope.user.login.id_login };		
+		Restangular.all('api/getAllNotifications').post(JSON.stringify(params)).then(function(not) {				
+			console.log(not);	
+			deffered.resolve(not);
+			$scope.notificacoes	= not;		
+		});
+		return deffered.promise;
+	} 
+	
+	
+	function setReadNotification(item) {	
+		var deffered  = $q.defer();	
+		var params = {  notificacao : item };		
+			Restangular.all('api/setReadNotification').post(JSON.stringify(params)).then(function(not) {				
+				deffered.resolve(not);				
+			});
+		return deffered.promise;
+	} 
+	
 	
 	$scope.goBack = function() {
 		$state.go('app.dashboard');
-	};	
+	};
 	
-	$scope.notificacoes = [
-	{ title: 'Prêmio Próximo!',tipo: 1, unread:0, id: 1, content: 'Paulo, faltam apenas 3000 pontos para o prêmio 123.' },
-	{ title: 'Mudança no Status da Obra!' ,  unread:1, tipo: 3 , id: 3, content: 'Paulo, houve mudança na obra 123.' },
-	{ title: 'Feliz Aniversário!',tipo: 2, unread:0, id: 2, content: 'Paulo, o Prata da Casa te deseja um excelente aniversário.' },
-	{ title: 'Mudança no Status da Obra!',  unread:1, tipo: 3, id: 4, content: 'Paulo, houve mudança na obra 321.' }
-	];
-	  
 	$scope.set_color = function (item) {
-		if (item.unread == 0) {
+		if (item.lida == 0) {
 			return { "background-color": "#f8f8f8" }
 		}else{
 			return { "background-color": "#ffffff" }
 		}
+	}	
+	
+	$scope.verificar = function (item){
+		var promise = [];		
+		promise.push(setReadNotification(item));
+		$q.all(promise).then(
+			function() {
+				$state.go('app.notificacao', {notificacao: item });
+			}
+		);
 	}
+	
+	promises.push(getAllNotifications());		
+	
+	$q.all(promises).then(
+		function() {
+			init();		
+		}	
+	);	
+	
+})
+
+.controller('NotificacaoCtrl', function($scope, $stateParams, $state, $q, Restangular, $rootScope) {
+	
+	console.log($state.params.notificacao);
+	$scope.notificacao = $state.params.notificacao;	
+	
+	$scope.goBack = function() {
+		$state.go('app.notificacoes');
+	};	
+	
+	$scope.goNoticia = function() {
+		var url = $scope.notificacao.url;
+		window.open(url, '_system', 'location=yes');
+	};	
+
+	
 })
 
 .controller('WelcomeCtrl', function($scope, $stateParams, $state, ionicMaterialMotion, ionicMaterialInk, $timeout, $rootScope , Restangular, $q) {
 	console.log('entrou no Dashboard?');
-	var promises = [];	
-	
-	var decoded = jwt_decode(window.localStorage.getItem("token"));	
-	
-	$rootScope.user = decoded.user;
+	var promises = [];		
+		
 	$scope.user = $rootScope.user;
 	console.log($rootScope.user);			
 	  
@@ -80,6 +132,30 @@ angular.module('starter.controllers', [])
 			$scope.totalIndicacoes = qtd[0].qtd;
 		});
 		return deffered.promise;
+	}
+
+	function getAllUnreadNotifications() {			
+		var deffered  = $q.defer();	
+		var params = {  id_login : $scope.user.login.id_login };		
+		Restangular.all('api/getAllUnreadNotifications').post(JSON.stringify(params)).then(function(qtd) {				
+			deffered.resolve(qtd);
+			console.log(qtd);
+			$scope.totalUnreadNotification = qtd[0].qtd;
+		});
+		return deffered.promise;
+	} 
+	
+	
+	
+	function getAllEmpresasPresenca() {			
+		var deffered  = $q.defer();	
+		console.log($scope.user);
+		var params = {  id_empresa : $scope.user.empresa.id };		
+		Restangular.all('api/getAllPresencaByEmpresa').post(JSON.stringify(params)).then(function(presenca) {			
+			deffered.resolve(presenca);
+			$scope.totalPresencas = presenca[0].qtdPresencaCampanhaAtiva;			
+		});
+		return deffered.promise;
 	} 
 	
 	function getAllEmpresasVisited() {			
@@ -92,21 +168,60 @@ angular.module('starter.controllers', [])
 		return deffered.promise;
 	} 
 	
+	function checkNewDispositivo(token) {			
+		console.log('chamou a rota?')
+		var deffered  = $q.defer();	
+		var params = {  id_login : $scope.user.login.id_login , token : token  };		
+		Restangular.all('api/checkNewDispositivo').post(JSON.stringify(params)).then(function(resp) {			
+			deffered.resolve(resp);
+		});
+		return deffered.promise;
+	}
+	
+	$scope.configFCM = function() {
+		if (typeof FCMPlugin != 'undefined') {				
+			FCMPlugin.getToken(function(token){
+				console.log(token)
+				var promisesToken = [];
+				promisesToken.push(checkNewDispositivo(token));
+				$q.all(promisesToken).then(function() {
+					console.log(token)	
+				});
+						
+			});
+			FCMPlugin.onNotification(function(data){
+				console.log('entrou?')
+				if(data.wasTapped){
+				//Notification was received on device tray and tapped by the user.
+				$state.go('app.notificacoes');
+				}else{
+				//Notification was received in foreground. Maybe the user needs to be notified.
+				$state.go('app.notificacoes');
+				}
+			});
+		}	
+	};	
+	
+	
 	$scope.goBack = function() {
 		$state.go('app.login');
-	};
+	};	
 	
-	console.log($scope.user.login.id_tipo_login);
+	
+	if($scope.user.login.id_tipo_login ==2){
+		promises.push(getAllEmpresasPresenca());
+	}
+
 	if($scope.user.login.id_tipo_login !=1 || $scope.user.login.id_tipo_login !=2 ){
 		promises.push(getAllEmpresasVisited());
 	}
 	
 	if($scope.user.especificador){
 		promises.push(getAllPontByIdEspec());
-	}
-	if($scope.user.especificador){
 		promises.push(getTotalIndicacoes());
 	}		
+	
+	promises.push(getAllUnreadNotifications())
 	
 	$q.all(promises).then(
 		function() {
@@ -116,7 +231,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PerfilCtrl', function($scope, $stateParams, $state, $rootScope,  $q, Restangular ) {
-	console.log('entrou no perfil?');
 	
 	$scope.tabs=0;
 	
@@ -165,6 +279,25 @@ angular.module('starter.controllers', [])
 		var deffered  = $q.defer();	
 		var params = {  id_empresa : $scope.perfil.id, nome : $scope.perfil.nome  };		
 		Restangular.all('/api/empresaUpdateNome').post(JSON.stringify(params)).then(function(espec) {					
+			deffered.resolve(espec);			
+		});
+		return deffered.promise;		
+	}
+	
+	function editarSobrenomeEspec() {			
+		var deffered  = $q.defer();	
+		var params = {  id_especificador : $scope.perfil.id, sobrenome : $scope.perfil.sobrenome  };		
+		Restangular.all('/api/especificadorUpdateSobrenome').post(JSON.stringify(params)).then(function(espec) {					
+			deffered.resolve(espec);			
+		});
+		return deffered.promise;		
+	}
+	
+	function editarSobrenomeCliente() {
+		console.log($scope.perfil)
+		var deffered  = $q.defer();	
+		var params = {  id_cliente : $scope.perfil.id, sobrenome : $scope.perfil.sobrenome  };		
+		Restangular.all('/api/clienteUpdateSobrenome').post(JSON.stringify(params)).then(function(espec) {					
 			deffered.resolve(espec);			
 		});
 		return deffered.promise;		
@@ -493,6 +626,27 @@ angular.module('starter.controllers', [])
 			}			
 		}
 		
+		if(formPerfil.nome.$dirty){
+			if($scope.user.login.id_tipo_login==3){
+				promises.push(editarNomeEspec());
+			}
+			if($scope.user.login.id_tipo_login==4){
+				promises.push(editarNomeCliente());
+			}
+			if($scope.user.login.id_tipo_login==2){
+				promises.push(editarNomeEmpresa());
+			}			
+		}
+		
+		if(formPerfil.sobrenome.$dirty){
+			if($scope.user.login.id_tipo_login==3){
+				promises.push(editarSobrenomeEspec());
+			}
+			if($scope.user.login.id_tipo_login==4){
+				promises.push(editarSobrenomeCliente());
+			}					
+		}
+		
 		if(formPerfil.empresa.$dirty){
 			if($scope.user.login.id_tipo_login==3){
 				promises.push(editarEmpresaEspec());
@@ -653,6 +807,8 @@ angular.module('starter.controllers', [])
 						$rootScope.user.especificador =  $scope.perfil;						
 					}
 					if($rootScope.user.cliente){
+						console.log('entrou no cliente?')
+						console.log($scope.perfil);
 						$rootScope.user.cliente =  $scope.perfil;
 					}	
 					if($rootScope.user.empresa){
@@ -664,7 +820,7 @@ angular.module('starter.controllers', [])
 	};	
 })
 
-.controller('LoginCtrl', function($scope, $stateParams,  $state, Restangular, $q, $ionicSideMenuDelegate) {
+.controller('LoginCtrl', function($scope, $stateParams,  $state, Restangular, $q, $ionicSideMenuDelegate, $rootScope) {
 	$ionicSideMenuDelegate.canDragContent(false);
 	console.log('entrou no login?');	
 	$scope.user = {};	
@@ -729,6 +885,8 @@ angular.module('starter.controllers', [])
 			if(!formLogin.$invalid){
 				if(retorno.lenght!=0){
 					if(retorno[0].type!=1){
+						var decoded = jwt_decode(window.localStorage.getItem("token"));		
+						$rootScope.user = decoded.user;
 						$state.go('app.dashboard');
 						formLogin.senha1.$setValidity("naoExiste", true);
 					}else{
@@ -741,10 +899,11 @@ angular.module('starter.controllers', [])
 	};	
 })
 
-.controller('EspecificadoresCtrl', function($scope, $stateParams, $state, $q, Restangular ) {
+.controller('EspecificadoresCtrl', function($scope, $stateParams, $state, $q, Restangular, $rootScope ) {
 	console.log('entrou no especificadores?');		
 	$scope.especificadores = [];
 	var promises = [];
+	$scope.user = $rootScope.user;
 	
 	function init() {			
 			console.log('especificadores');
@@ -794,10 +953,11 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('EmpresasCtrl', function($scope, $stateParams, $state, $q, Restangular ) {
+.controller('EmpresasCtrl', function($scope, $stateParams, $state, $q, Restangular, $rootScope ) {
 	console.log('entrou no empresas?');	
 	$scope.empresas = [];	
-	var promises = [];
+	var promises = [];	
+	$scope.user = $rootScope.user;
 	
 	function init() {			
 		console.log($scope.empresas);				

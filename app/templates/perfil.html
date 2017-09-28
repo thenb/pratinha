@@ -8,17 +8,17 @@
 	<ion-content style="background: #fff;">
 	<form name="formPerfil">
 		<div class="hero" style="background-color: #27386D; height: 220px;">
-			<div class="content">
-				<div class="avatar" style="background-image: url('img/user.jpg');"></div>
-				<h3 ng-if="user.login.id_tipo_login==3">{{user.especificador.nome}}</h3>
-				<h3 ng-if="user.login.id_tipo_login==4">{{user.cliente.nome}}</h3>
+			<div class="content">				
+				<div ng-if="!user.login.url_perfil" class="avatar" style="background-image: url('img/user.jpg');"></div>
+				<div ng-if="user.login.url_perfil" class="avatar" style="background-image: url('{{user.login.url_perfil}}');"></div>				
+				<h3 ng-if="user.login.id_tipo_login==3">{{user.especificador.nome}} {{user.especificador.sobrenome}}</h3>
+				<h3 ng-if="user.login.id_tipo_login==4">{{user.cliente.nome}} {{user.cliente.sobrenome}}</h3>
 				<h3 ng-if="user.login.id_tipo_login==2">{{user.empresa.nome}}</h3>
 				<h3 ng-if="user.login.id_tipo_login==1">Administrador</h3>
 				<h4 style="font-style: italic;" ng-if="user.login.id_tipo_login==3">Especificador</h4>
 				<h4 style="font-style: italic;" ng-if="user.login.id_tipo_login==4">Cliente</h4>
 				<h4 style="font-style: italic;" ng-if="user.login.id_tipo_login==2">Empresa</h4>
-				<h4 style="font-style: italic;" ng-if="user.login.id_tipo_login==1">Administrador</h4>
-				<a href=""><h5 style="margin-bottom: 15px; font-size: 12px;">(Alterar Imagem)</h5></a>
+				<h4 style="font-style: italic;" ng-if="user.login.id_tipo_login==1">Administrador</h4>				
 			</div>
 		</div>	
 		<ion-card class="text-center">
@@ -47,11 +47,15 @@
 							  </div>						  
 							</div>					
 						</label>
+						<label class="item item-input item-floating-label" ng-show="user.login.id_tipo_login==3 || user.login.id_tipo_login==4">
+							<span class="input-label">Sobrenome</span>
+							<input type="text" placeholder="Sobrenome" name="sobrenome" ng-model="perfil.sobrenome">
+						</label>
 						<label class="item item-input item-floating-label">
 							<span class="input-label">E-mail</span>
 							<input type="text" placeholder="Nome" name="email" ng-model="login.email" ng-disabled="true" >
 						</label>
-						<label class="item item-input item-floating-label" ng-show="user.login.id_tipo_login==4 || user.login.id_tipo_login==3">
+						<label class="item item-input item-floating-label" ng-show="user.login.id_tipo_login==3">
 							<span class="input-label">Empresa</span>
 							<input type="text" placeholder="Empresa" name="empresa" ng-model="perfil.empresa"  >
 						</label>
@@ -69,7 +73,7 @@
 						</label>
 						<label class="item item-input item-floating-label" ng-show="user.login.id_tipo_login==3">
 							<span class="input-label">CPF</span>
-							<input type="text" placeholder="CPF" ng-model="perfil.cpf" name="cpf"   ui-br-cpf-mask >
+							<input type="text" placeholder="CPF" ng-model="perfil.cpf" name="cpf">
 						</label>		   
 						<label class="item item-input item-floating-label" ng-show="user.login.id_tipo_login==3">
 							<span class="input-label">RG</span>
@@ -77,7 +81,7 @@
 						</label>			   
 						<label class="item item-input item-floating-label" required>
 							<span class="input-label">Telefone 1</span>
-							<input type="text" placeholder="Telefone 1" ng-model="perfil.telefone" name="telefone" ui-br-phone-number  >
+							<input type="text" placeholder="Telefone 1" ng-model="perfil.telefone" name="telefone">
 							<div ng-messages="formPerfil.telefone.$error">
 							  <div ng-message="required">
 								Favor inserir telefone.
@@ -86,7 +90,7 @@
 						</label>				   
 						<label class="item item-input item-floating-label">
 							<span class="input-label">Telefone 2</span>
-							<input type="text" placeholder="Telefone 2" ng-model="perfil.celular" name="celular" ui-br-phone-number  >
+							<input type="text" placeholder="Telefone 2" ng-model="perfil.celular" name="celular">
 						</label>
 						<label class="item item-input item-floating-label" ng-show="user.login.id_tipo_login==3">
 							<span class="input-label">Profissão</span>
@@ -106,7 +110,7 @@
 						</label>
 						<label class="item item-input item-floating-label">
 							<span class="input-label">CEP</span>
-							<input type="text" placeholder="CEP" ng-model="perfil.cep" name="cep"  ui-br-cep-mask >
+							<input type="text" placeholder="CEP" ng-model="perfil.cep" name="cep">
 						</label>
 						<label class="item item-input item-floating-label">
 							<span class="input-label">Número</span>

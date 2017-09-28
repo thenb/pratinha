@@ -9,7 +9,7 @@
 		<div class="hero" style="background-color: #27386D">
 			<div class="content">
 				<div class="avatar" style="background-image: url('img/user.jpg');"></div>				
-				<h3>{{cliente1.nome}}</h3>
+				<h3>{{cliente1.nome}} {{cliente1.sobrenome}}</</h3>
 				<h4 style="font-style: italic;">Cliente</h4>				
 			</div>
 		</div>			
@@ -33,21 +33,17 @@
 					<div class="im-wrapper">				
 						<div class="list">
 						  <label class="item item-input item-floating-label ">
-							<span class="input-label">Nome do Cliente</span>
-							<input type="text" placeholder="Nome do Cliente" ng-model="cliente1.nome" ng-disabled="true" style="background-color:white">
+							<span class="input-label">Nome</span>
+							<input type="text" placeholder="Nome" ng-model="cliente1.nome" ng-disabled="true" style="background-color:white">
+						  </label>
+						  <label class="item item-input item-floating-label ">
+							<span class="input-label">Sobrenome</span>
+							<input type="text" placeholder="Sobrenome" ng-model="cliente1.sobrenome" ng-disabled="true" style="background-color:white">
 						  </label>
 						  <label class="item item-input item-floating-label">
 							<span class="input-label">Indicado Por</span>
 							<input type="text" placeholder="Indicador por" ng-model="indicou.nome" ng-disabled="true" style="background-color:white">
-						  </label>
-						  <label class="item item-input item-floating-label">
-							<span class="input-label">Empresa</span>
-							<input type="text" placeholder="Empresa" ng-model="cliente1.empresa"  ng-disabled="true"  style="background-color:white">
-						  </label>
-						  <label class="item item-input item-floating-label">
-							<span class="input-label">Empresa</span>
-							<input type="text" placeholder="Empresa" ng-model="cliente1.empresa"  ng-disabled="true"  style="background-color:white">
-						  </label>
+						  </label>						  
 						  <label class="item item-input item-floating-label">
 							<span class="input-label">Data Nascimento</span>
 							<input type="text"  ng-model="cliente1.data_nascimento" ui-date-mask="DD-MM-YYYY"  ng-disabled="true"  style="background-color:white">
@@ -93,6 +89,9 @@
 				</div>				
 				<div ng-if="tabs==1">
 					<div class="im-wrapper">				
+						<header class="panel-heading">	
+							<h4 class="panel-title">Fases da Obra</h4>
+						</header>
 						<div class = "list">
 							<li class="item item-checkbox">
 							   Fundação
@@ -149,6 +148,41 @@
 							   </label>
 							</li>					
 						</div>
+						<header class="panel-heading">	
+							<h4 class="panel-title">Tipo da Obra</h4>
+						</header>
+						<div class = "list">
+							<li class="item item-checkbox">
+							   Residencial
+							   <label class="checkbox">
+							  <input  type="radio" id="residencial"  name="tipo" ng-model="cliente1.tipo"  ng-value="0" ng-disabled="true">
+							   </label>
+							</li>
+							<li class="item item-checkbox">
+							   Comercial
+							   <label class="checkbox">
+							   <input type="radio" id="comercial"  name="tipo" ng-model="cliente1.tipo"  ng-value="1" ng-disabled="true">
+							   </label>
+							</li>
+							<li class="item item-checkbox">
+							   Prédio
+							   <label class="checkbox">
+							   <input type="radio" id="predio"  name="tipo" ng-model="cliente1.tipo"  ng-value="2" ng-disabled="true">
+							   </label>
+							</li>
+							<li class="item item-checkbox">
+							   Térrea
+								<label class="checkbox">
+									<input type="radio" id="terrea" name="terrea" ng-model="cliente1.terrea"  ng-value="0" ng-disabled="true">
+								</label>
+							</li>
+							<li class="item item-checkbox">
+							   Sobrado
+								<label class="checkbox">
+									<input type="radio" id="sobrado"  name="terrea" ng-model="cliente1.terrea"  ng-value="1" ng-disabled="true">
+								</label>
+							</li>											
+						</div>						
 					</div>
 				</div>
 				<div ng-if="tabs==2">
@@ -180,19 +214,15 @@
 						<label class="item item-input item-floating-label">
 							<span class="input-label">Telefone 2 Empreiteiro</span>
 							<input type="text" placeholder="Telefone 2 Empreiteiro" ui-br-phone-number ng-model="cliente1.telefone2_empreiteiro" ng-disabled="true" style="background-color:white">
-						</label>					
-						<label class="item item-input item-floating-label">
-							<span class="input-label">Responsável da Obra</span>
-							<input type="text" placeholder="Responsável da Obra" ng-model="cliente1.nome_responsavel" ng-disabled="true" style="background-color:white">
-						</label>										
+						</label>															
 					</div>
-					<div ng-if="tabs==3">
-						<div class="im-wrapper">					
-							<label class="item item-input item-floating-label">
-								<span class="input-label">Observações</span>
-								<textarea placeholder="Observações" ng-model="cliente1.observacoes" ng-disabled="true" rows="3" style="background-color:white"></textarea>
-							</label>	
-						</div>
+				</div>
+				<div ng-if="tabs==3">
+					<div class="im-wrapper">					
+						<label class="item item-input item-floating-label">
+							<span class="input-label">Observações</span>
+							<textarea placeholder="Observações" ng-model="cliente1.observacoes" ng-disabled="true" rows="3" style="background-color:white"></textarea>
+						</label>	
 					</div>
 				</div>
 			</div>
