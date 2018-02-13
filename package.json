@@ -1,79 +1,99 @@
 {
-    "name": "App",
-    "version": "0.0.0",
-    "private": true,
-    "dependencies": {
-        "cordova-android": "^6.2.3",
-        "cordova-plugin-fcm": "^2.1.2",
-        "cordova-plugin-inappbrowser": "^1.7.1",
-        "cordova-plugin-velda-devicefeedback": "0.0.2",
-        "cordova-plugin-whitelist": "git+https://github.com/apache/cordova-plugin-whitelist.git"
-    },
-    "devDependencies": {
-        "grunt": "~0.4.5",
-        "glob": "~4.3.5",
-        "grunt-autoprefixer": "~2.2.0",
-        "grunt-wiredep": "^2.0.0",
-        "ionic": "^1.6.4",
-        "grunt-concurrent": "1.0.0",
-        "grunt-contrib-clean": "~0.6.0",
-        "grunt-contrib-concat": "~0.5.0",
-        "grunt-contrib-connect": "~0.9.0",
-        "grunt-contrib-copy": "~0.7.0",
-        "grunt-contrib-cssmin": "~0.11.0",
-        "grunt-contrib-htmlmin": "~0.3.0",
-        "grunt-contrib-jshint": "~0.11.0",
-        "grunt-contrib-uglify": "~0.7.0",
-        "grunt-contrib-watch": "~0.6.1",
-        "grunt-newer": "~1.1.0",
-        "grunt-usemin": "~3.0.0",
-        "grunt-ng-annotate": "~0.9.2",
-        "grunt-ng-constant": "^1.0.0",
-        "grunt-karma": "~0.10.1",
-        "karma": "~0.12.31",
-        "karma-mocha": "~0.1.10",
-        "karma-chai": "~0.1.0",
-        "karma-chrome-launcher": "~0.1.7",
-        "karma-phantomjs-launcher": "~0.1.4",
-        "karma-coverage": "~0.2.7",
-        "jshint-stylish": "~1.0.0",
-        "load-grunt-tasks": "~3.1.0",
-        "time-grunt": "~1.0.0",
-        "cordova": "~4.2.0",
-        "lodash": "~3.1.0",
-        "mkdirp": "~0.5.0",
-        "ncp": "~1.0.1",
-        "orchestrator": "~0.3.7",
-        "ripple-emulator": "~0.9.24",
-        "elementtree": "0.1.6",
-        "plist": "1.1.0",
-        "win-spawn": "^2.0.0"
-    },
-    "engines": {
-        "node": ">=0.10.0"
-    },
-    "scripts": {
-        "test": "grunt test"
-    },
-    "cordovaPlugins": [
-        "org.apache.cordova.device",
-        "org.apache.cordova.console",
-        "com.ionic.keyboard",
-        "https://github.com/apache/cordova-plugin-whitelist.git",
-        "cordova-plugin-inappbrowser",
-        "cordova-plugin-velda-devicefeedback",
-        "phonegap-plugin-push@1.8.4",
-        "cordova-plugin-fcm"
+  "name": "App",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "bower": "^1.8.2",
+    "cordova": "^4.2.0",
+    "cordova-plugin-device": "^1.1.4",
+    "cordova-plugin-fcm": "^2.1.2",
+    "cordova-plugin-inappbrowser": "^1.7.2",
+    "cordova-plugin-ionic-webview": "^1.1.16",
+    "cordova-plugin-splashscreen": "^4.0.3",
+    "cordova-plugin-velda-devicefeedback": "0.0.2",
+    "cordova-plugin-whitelist": "git+https://github.com/apache/cordova-plugin-whitelist.git",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^1.2.0",
+    "ionic-cli": "0.0.0",
+    "ionic-plugin-keyboard": "^2.2.1",
+    "cordova-android": "~6.3.0"
+  },
+  "devDependencies": {
+    "cordova": "~4.2.0",
+    "elementtree": "0.1.6",
+    "glob": "~4.3.5",
+    "grunt": "~0.4.5",
+    "grunt-autoprefixer": "^2.2.0",
+    "grunt-concurrent": "^1.0.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-connect": "^0.9.0",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-cssmin": "^0.11.0",
+    "grunt-contrib-htmlmin": "^0.3.0",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-karma": "^0.10.1",
+    "grunt-newer": "^1.1.2",
+    "grunt-ng-annotate": "^0.9.2",
+    "grunt-ng-constant": "^1.1.0",
+    "grunt-usemin": "^3.0.0",
+    "grunt-wiredep": "^2.0.0",
+    "ionic": "^1.6.4",
+    "jshint-stylish": "^1.0.2",
+    "karma": "^0.12.37",
+    "karma-chai": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.7",
+    "karma-coverage": "~0.2.7",
+    "karma-mocha": "~0.1.10",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "load-grunt-tasks": "^3.1.0",
+    "lodash": "~3.1.0",
+    "mkdirp": "~0.5.0",
+    "ncp": "~1.0.1",
+    "orchestrator": "~0.3.7",
+    "plist": "1.1.0",
+    "ripple-emulator": "~0.9.24",
+    "time-grunt": "^1.0.0",
+    "win-spawn": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "cordovaPlugins": [
+    "org.apache.cordova.device",
+    "org.apache.cordova.console",
+    "com.ionic.keyboard",
+    "https://github.com/apache/cordova-plugin-whitelist.git",
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-velda-devicefeedback",
+    "phonegap-plugin-push@1.8.4",
+    "cordova-plugin-fcm",
+    "ionic-plugin-keyboard@~2.2.1",
+    "cordova-plugin-device@1.1.4",
+    "cordova-plugin-splashscreen@~4.0.1",
+    "cordova-plugin-ionic-webview@^1.1.11",
+    "cordova-plugin-inappbrowser@^1.7.1",
+    "cordova-plugin-velda-devicefeedback@0.0.2",
+    "cordova-plugin-fcm@^2.1.2"
+  ],
+  "cordova": {
+    "platforms": [
+      "android"
     ],
-    "cordova": {
-        "platforms": [
-            "android"
-        ],
-        "plugins": {
-            "cordova-plugin-whitelist": {},
-            "cordova-plugin-inappbrowser": {},
-            "cordova-plugin-velda-devicefeedback": {},
-            "cordova-plugin-fcm": {}
-        }
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-velda-devicefeedback": {},
+      "cordova-plugin-fcm": {},
+      "ionic-plugin-keyboard": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {}
     }
+  }
 }
