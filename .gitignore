@@ -1,6 +1,7 @@
 -node_modules
 -www
 .idea
+.ideas
 .temp
 .sass-cache
 -app/bower_components
