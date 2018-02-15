@@ -208,8 +208,8 @@ angular.module('starter', ['ionic','ionic-material','restangular','ngMessages','
 	
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
-  RestangularProvider.setBaseUrl('https://prata.herokuapp.com/');
-  //RestangularProvider.setBaseUrl('http://ec2-54-233-210-28.sa-east-1.compute.amazonaws.com:9002/');
+  //RestangularProvider.setBaseUrl('https://prata.herokuapp.com/');
+  RestangularProvider.setBaseUrl('http://ec2-54-233-210-28.sa-east-1.compute.amazonaws.com:9002/');
   $httpProvider.interceptors.push('authInterceptor');
   
 });
