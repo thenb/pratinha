@@ -48,11 +48,10 @@
     <key>UIRequiresFullScreen</key>
     <true/>
     <key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>			
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
 		</dict>
-	</dict>
     <key>UILaunchStoryboardName</key>
     <string>CDVLaunchScreen</string>
   </dict>
